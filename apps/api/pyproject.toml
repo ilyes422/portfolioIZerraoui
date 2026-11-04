@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "portfolio-api"
+version = "0.1.0"
+description = "API du portfolio public d'Ilyes Zerraoui"
+requires-python = ">=3.12,<3.15"
+dependencies = [
+    "fastapi==0.162.0",
+    "uvicorn==0.54.0",
+    "pydantic-settings==2.16.2",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==9.2.0", "httpx==0.28.1"]
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

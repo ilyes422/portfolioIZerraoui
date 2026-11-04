@@ -1,0 +1,27 @@
+# Dependencies and generated files
+node_modules/
+.next/
+out/
+.vercel/
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+coverage/
+*.tsbuildinfo
+playwright-report/
+test-results/
+
+# Credentials and private documents
+.env
+.env.*
+!.env.example
+private/
+
+# Local tooling
+.pnpm-store/
+.DS_Store
+Thumbs.db

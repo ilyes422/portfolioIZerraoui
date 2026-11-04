@@ -1,0 +1,26 @@
+packages:
+  - apps/web
+
+nodeLinker: hoisted
+storeDir: .pnpm-store
+engineStrict: true
+saveExact: true
+minimumReleaseAge: 1440
+
+# Exception authorized by the owner for the 2026-11-03 security release.
+# Only these exact versions are exempt from the 24-hour release-age delay.
+# https://github.com/vercel/next.js/releases/tag/v16.4.5
+minimumReleaseAgeExclude:
+  - next@16.4.5
+  - '@next/env@16.4.5'
+  - '@next/swc-darwin-arm64@16.4.5'
+  - '@next/swc-darwin-x64@16.4.5'
+  - '@next/swc-linux-arm64-gnu@16.4.5'
+  - '@next/swc-linux-arm64-musl@16.4.5'
+  - '@next/swc-linux-x64-gnu@16.4.5'
+  - '@next/swc-linux-x64-musl@16.4.5'
+  - '@next/swc-win32-arm64-msvc@16.4.5'
+  - '@next/swc-win32-x64-msvc@16.4.5'
+
+onlyBuiltDependencies:
+  - sharp
