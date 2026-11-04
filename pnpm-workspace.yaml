@@ -1,0 +1,11 @@
+packages:
+  - apps/web
+
+nodeLinker: hoisted
+storeDir: .pnpm-store
+engineStrict: true
+saveExact: true
+minimumReleaseAge: 1440
+
+onlyBuiltDependencies:
+  - sharp
