@@ -10,10 +10,11 @@ typographie lisible et interactions accessibles.
 HTML, un backend FastAPI, son endpoint de santé, une configuration CORS explicite,
 des tests et une procédure de vérification continue.
 
-La validation frontend reste en attente : le contrôle d'âge de pnpm bloque
-Next.js 16.4.5, publication de sécurité âgée de moins de 24 heures au moment de
-l'installation. Les tests backend et sa réponse HTTP ont été vérifiés. Voir le
-[relevé de vérification](docs/verification-phase-1.md) pour les limites exactes.
+La vérification des types et le build de production réussissent. Le contrôle HTTP
+confirme la page, ses styles, le fichier robots et le proxy vers FastAPI. Les
+10 tests backend réussissent également. L'inspection visuelle reste à effectuer,
+l'outil navigateur étant indisponible lors de cette phase. Voir le
+[relevé de vérification](docs/verification-phase-1.md).
 
 Les pages détaillées, le jeu, les résultats sportifs et le RAG seront construits
 dans les phases suivantes. Aucun fournisseur externe n'est nécessaire à cette
@@ -58,6 +59,8 @@ pnpm typecheck
 pnpm build
 .\.venv\Scripts\python.exe -m pytest apps/api
 ```
+
+Avec les deux serveurs lancés, `pnpm verify:local` vérifie le trajet HTTP complet.
 
 La commande de build n'appelle aucun service IA ou sportif. Le frontend relaie
 `/api/*` au backend défini par `API_BASE_URL` ; cette variable reste côté serveur.

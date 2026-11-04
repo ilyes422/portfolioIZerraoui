@@ -8,6 +8,7 @@
     "dev:web": "pnpm --filter @portfolio/web dev",
     "build": "pnpm --filter @portfolio/web build",
     "start:web": "pnpm --filter @portfolio/web start",
-    "typecheck": "pnpm --filter @portfolio/web typecheck"
+    "typecheck": "pnpm --filter @portfolio/web typecheck",
+    "verify:local": "node scripts/verify-foundation.mjs"
   }
 }
