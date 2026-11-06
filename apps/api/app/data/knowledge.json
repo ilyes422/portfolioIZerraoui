@@ -1,0 +1,138 @@
+[
+  {
+    "id": "cv",
+    "title": "Profil",
+    "label": "CV et compétences",
+    "href": "/cv",
+    "text": "Développeur web et applications, formé au développement d’applications et expérimenté dans les outils métier pour les concessions automobiles.",
+    "keywords": "cv curriculum profil candidature developpeur"
+  },
+  {
+    "id": "skills",
+    "title": "Compétences",
+    "label": "CV et compétences",
+    "href": "/cv",
+    "text": "Frameworks : Symfony, Laravel, CakePHP, Spring, Flutter. Langages et web : HTML/CSS, JavaScript/jQuery, PHP, Java, Python. Outils et méthodes : Linux, Windows, Git, SQL, Méthode agile.",
+    "keywords": "competence competences technologies stacks langage outils framework"
+  },
+  {
+    "id": "languages",
+    "title": "Langues",
+    "label": "CV et compétences",
+    "href": "/cv",
+    "text": "Français · natif ; Anglais · courant ; Espagnol · intermédiaire.",
+    "keywords": "langues niveau anglais espagnol francais"
+  },
+  {
+    "id": "experience-0",
+    "title": "Développeur web en alternance · XEFI",
+    "label": "Parcours professionnel",
+    "href": "/parcours",
+    "text": "Août 2024 – octobre 2025. Développement de sites et d’applications pour concessions automobiles avec CakePHP et Laravel. Recueil des besoins clients et démonstrations. Maintenance d’applications existantes et travail en équipe agile.",
+    "keywords": "parcours experience missions alternance stage"
+  },
+  {
+    "id": "experience-1",
+    "title": "Stage informatique · SNCF",
+    "label": "Parcours professionnel",
+    "href": "/parcours",
+    "text": "Novembre – décembre 2023. Prise en main de Java et de Spring Boot. Développement d’une API avec Spring Boot.",
+    "keywords": "parcours experience missions alternance stage"
+  },
+  {
+    "id": "experience-2",
+    "title": "Assistant administratif · EN3S",
+    "label": "Parcours professionnel",
+    "href": "/parcours",
+    "text": "Août – septembre 2023. Gestion des ressources informatiques et déploiement de Windows 11.",
+    "keywords": "parcours experience missions alternance stage"
+  },
+  {
+    "id": "experience-3",
+    "title": "Stage informatique · EN3S",
+    "label": "Parcours professionnel",
+    "href": "/parcours",
+    "text": "Juin – juillet 2023. Prise en main de Symfony et développement d’un site web.",
+    "keywords": "parcours experience missions alternance stage"
+  },
+  {
+    "id": "education-0",
+    "title": "Concepteur développeur d’applications (Bac+3)",
+    "label": "Formations",
+    "href": "/parcours",
+    "text": "EPSI, Lyon, 2024 – 2025.",
+    "keywords": "etudes formation diplome scolarite parcours"
+  },
+  {
+    "id": "education-1",
+    "title": "BTS SIO, option SLAM",
+    "label": "Formations",
+    "href": "/parcours",
+    "text": "Lycée George Brassens, Rive-de-Gier, 2022 – 2024.",
+    "keywords": "etudes formation diplome scolarite parcours"
+  },
+  {
+    "id": "education-2",
+    "title": "Licence MISPIC, option informatique (parcours suivi)",
+    "label": "Formations",
+    "href": "/parcours",
+    "text": "Faculté des sciences Jean Monnet, Saint-Étienne, 2020 – 2022.",
+    "keywords": "etudes formation diplome scolarite parcours"
+  },
+  {
+    "id": "education-3",
+    "title": "Baccalauréat scientifique, option informatique",
+    "label": "Formations",
+    "href": "/parcours",
+    "text": "Lycée Honoré d’Urfé, Saint-Étienne, 2017 – 2020.",
+    "keywords": "etudes formation diplome scolarite parcours"
+  },
+  {
+    "id": "project-portfolio",
+    "title": "Portfolio interactif",
+    "label": "Portfolio interactif",
+    "href": "/projets#portfolio",
+    "text": "Projet personnel. Un portfolio qui réunit mon profil de développeur, un espace football, un jeu de devinettes et un assistant appuyé sur des sources publiques. Technologies : React, Next.js, TypeScript, Python, FastAPI.",
+    "keywords": "projet projets realisations developpement technologies"
+  },
+  {
+    "id": "project-applications-metier",
+    "title": "Applications métier pour concessions",
+    "label": "Applications métier pour concessions",
+    "href": "/projets#applications-metier",
+    "text": "Expérience professionnelle · XEFI. Développement et maintenance de sites et d’applications pour des concessions automobiles, recueil des besoins et démonstrations en équipe agile. Technologies : PHP, CakePHP, Laravel.",
+    "keywords": "projet projets realisations developpement technologies"
+  },
+  {
+    "id": "project-api-spring",
+    "title": "API avec Spring Boot",
+    "label": "API avec Spring Boot",
+    "href": "/projets#api-spring",
+    "text": "Stage · SNCF. Développement d’une API pendant mon stage informatique, après une prise en main de Java et de Spring Boot. Technologies : Java, Spring Boot.",
+    "keywords": "projet projets realisations developpement technologies"
+  },
+  {
+    "id": "contact",
+    "title": "Contact",
+    "label": "Page Contact",
+    "href": "/contact",
+    "text": "Ilyes est basé à Saint-Étienne. Son e-mail et son téléphone publics sont disponibles sur la page Contact.",
+    "keywords": "contacter contact joignable email e-mail telephone ville adresse recrutement"
+  },
+  {
+    "id": "game",
+    "title": "Devine le joueur",
+    "label": "Jouer",
+    "href": "/jouer",
+    "text": "Le jeu propose des indices sourcés, trois tentatives et un score local.",
+    "keywords": "jeu devinette joueur foot football jouer"
+  },
+  {
+    "id": "football",
+    "title": "Résultats de football",
+    "label": "Résultats",
+    "href": "/resultats",
+    "text": "L’espace football présente les matchs du jour lorsque la source sportive est disponible.",
+    "keywords": "match matchs resultats scores competition ligue football foot"
+  }
+]

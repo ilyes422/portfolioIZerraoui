@@ -1,0 +1,21 @@
+{
+  "summary": "Développeur web et applications, formé au développement d’applications et expérimenté dans les outils métier pour les concessions automobiles.",
+  "experience": [
+    {"role":"Développeur web en alternance","organization":"XEFI","period":"Août 2024 – octobre 2025","tasks":["Développement de sites et d’applications pour concessions automobiles avec CakePHP et Laravel.","Recueil des besoins clients et démonstrations.","Maintenance d’applications existantes et travail en équipe agile."]},
+    {"role":"Stage informatique","organization":"SNCF","period":"Novembre – décembre 2023","tasks":["Prise en main de Java et de Spring Boot.","Développement d’une API avec Spring Boot."]},
+    {"role":"Assistant administratif","organization":"EN3S","period":"Août – septembre 2023","tasks":["Gestion des ressources informatiques et déploiement de Windows 11."]},
+    {"role":"Stage informatique","organization":"EN3S","period":"Juin – juillet 2023","tasks":["Prise en main de Symfony et développement d’un site web."]}
+  ],
+  "education": [
+    {"title":"Concepteur développeur d’applications (Bac+3)","school":"EPSI, Lyon","period":"2024 – 2025"},
+    {"title":"BTS SIO, option SLAM","school":"Lycée George Brassens, Rive-de-Gier","period":"2022 – 2024"},
+    {"title":"Licence MISPIC, option informatique (parcours suivi)","school":"Faculté des sciences Jean Monnet, Saint-Étienne","period":"2020 – 2022"},
+    {"title":"Baccalauréat scientifique, option informatique","school":"Lycée Honoré d’Urfé, Saint-Étienne","period":"2017 – 2020"}
+  ],
+  "skills": [
+    {"category":"Frameworks","items":["Symfony","Laravel","CakePHP","Spring","Flutter"]},
+    {"category":"Langages et web","items":["HTML/CSS","JavaScript/jQuery","PHP","Java","Python"]},
+    {"category":"Outils et méthodes","items":["Linux","Windows","Git","SQL","Méthode agile"]}
+  ],
+  "languages": ["Français · natif","Anglais · courant","Espagnol · intermédiaire"]
+}

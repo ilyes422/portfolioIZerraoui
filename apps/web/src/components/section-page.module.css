@@ -1,0 +1,125 @@
+.intro {
+  padding: 46px 0 32px;
+  max-width: 810px;
+}
+.back,
+.eyebrow {
+  color: var(--accent);
+  font-size: 12px;
+}
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.eyebrow {
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.intro h1 {
+  margin: 12px 0;
+  font-size: clamp(32px, 5vw, 60px);
+  letter-spacing: -0.045em;
+  line-height: 1.1;
+}
+.description {
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 16px;
+}
+.body {
+  padding-bottom: 42px;
+  min-height: 45vh;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 275px), 1fr));
+  gap: 17px;
+}
+.card {
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.card h2,
+.card h3 {
+  margin: 0 0 10px;
+  letter-spacing: -0.025em;
+}
+.card h2 {
+  font-size: 19px;
+}
+.card h3 {
+  font-size: 15px;
+}
+.card p,
+.card li {
+  line-height: 1.65;
+  color: var(--muted);
+  font-size: 14px;
+}
+.card > p:first-child {
+  margin-top: 0;
+}
+.list {
+  display: grid;
+  gap: 14px;
+}
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+}
+.badges li {
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 12px;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 15px;
+  min-height: 44px;
+  border: 1px solid var(--accent-border);
+  border-radius: 8px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  font-size: 13px;
+  font-weight: 650;
+  cursor: pointer;
+}
+.button:hover {
+  border-color: var(--accent);
+}
+.primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.button:disabled {
+  opacity: 0.5;
+}
+.inlineLink {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  overflow-wrap: anywhere;
+}
+.sectionTitle {
+  font-size: 22px;
+  margin: 30px 0 15px;
+}

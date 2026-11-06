@@ -1,8 +1,8 @@
 # Préparation du déploiement
 
-Le déploiement public complet est prévu en phase 8. La phase 1 ne crée pas de
-projet Vercel et n'active aucun service externe. Les préversions restent en
-`noindex` pendant la construction du contenu.
+Les préversions restent en `noindex`. Le site peut être construit avec ses pages,
+son CV public, son jeu et les réponses fondées sur les extraits locaux. Les scores
+et les appels aux fournisseurs s’activent après configuration serveur.
 
 ## Cible Vercel
 
@@ -22,10 +22,11 @@ considérer cette configuration comme opérationnelle.
 
 1. Vérifier l'URL réelle attribuée au frontend et au backend.
 2. Définir `API_BASE_URL` sur le frontend avec l'origine HTTPS de l'API.
-3. Définir `APP_ENV=production` et `CORS_ORIGINS` avec l'origine HTTPS exacte du
-   portfolio sur le backend. Ne pas autoriser tous les domaines de préversion.
+3. Définir `APP_ENV=production` et `CORS_ORIGINS` avec l’origine HTTPS exacte du
+   portfolio sur le backend. `CORS_ORIGINS` attend un tableau JSON.
 4. Vérifier les mécanismes de protection des déploiements et le passage du proxy.
-5. Définir l'URL canonique réelle et activer l'indexation après la vérification SEO.
+5. Définir `SITE_URL` sur l’URL publique et `ALLOW_INDEXING=true` sur le frontend
+   de production après vérification. Recompiler pour publier le sitemap.
 6. Tester `/api/health` à travers le domaine public, puis les fonctionnalités finales.
 
 L'adresse visée est `ilyes-zerraoui-portfolio.vercel.app`, sous réserve de
@@ -37,10 +38,9 @@ Vercel Hobby est destiné à un usage personnel non commercial et applique des
 quotas. Les niveaux gratuits des fournisseurs ont leurs propres limites. Aucune
 activation payante ne doit être effectuée sans accord explicite.
 
-Le système de fichiers des fonctions n'est pas un stockage durable. Le futur
-index vectoriel et les compteurs partagés seront hébergés dans des services
-adaptés. L'indexation se fera par script contrôlé, jamais par un endpoint public
-permettant aux visiteurs d'envoyer des documents.
+Le corpus local est un fichier en lecture dans l’application. Upstash peut héberger
+l’index vectoriel et les compteurs partagés. Le [guide des services](services.md)
+donne les variables, les comptes à préparer et les vérifications à exécuter.
 
 Références :
 

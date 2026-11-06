@@ -28,6 +28,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm typecheck
+      - run: node --test scripts/test-game.mjs
       - run: pnpm build
 
   backend:
@@ -43,3 +44,4 @@ jobs:
       - run: python -m pip install -r apps/api/requirements.lock.txt
       - run: python -m pip install --no-deps -e apps/api
       - run: python -m pytest apps/api
+      - run: python scripts/index_knowledge.py --check

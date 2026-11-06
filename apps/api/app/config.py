@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Literal
 from urllib.parse import urlsplit
 
-from pydantic import Field, field_validator, model_validator
+from pydantic import Field, SecretStr, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -13,10 +13,21 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=Path(__file__).resolve().parents[1] / ".env",
         env_file_encoding="utf-8",
+        env_ignore_empty=True,
         extra="ignore",
     )
 
     app_env: Literal["development", "test", "production"] = "development"
+    football_data_token: SecretStr | None = None
+    llm_api_key: SecretStr | None = None
+    llm_base_url: str = "https://api.groq.com/openai/v1"
+    llm_model: str = "openai/gpt-oss-20b"
+    llm_requests_per_minute: int = Field(default=6, ge=1, le=30)
+    llm_requests_per_day: int = Field(default=75, ge=1, le=500)
+    upstash_redis_rest_url: str = ""
+    upstash_redis_rest_token: SecretStr | None = None
+    upstash_vector_rest_url: str = ""
+    upstash_vector_rest_token: SecretStr | None = None
     cors_origins: list[str] = Field(
         default_factory=lambda: ["http://localhost:3000", "http://127.0.0.1:3000"]
     )
