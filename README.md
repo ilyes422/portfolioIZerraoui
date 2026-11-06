@@ -6,19 +6,11 @@ typographie lisible et interactions accessibles.
 
 ## État du projet
 
-**Phase 1 : fondations.** Le dépôt contient une page d'accueil initiale rendue en
-HTML, un backend FastAPI, son endpoint de santé, une configuration CORS explicite,
-des tests et une procédure de vérification continue.
-
-La vérification des types et le build de production réussissent. Le contrôle HTTP
-confirme la page, ses styles, le fichier robots et le proxy vers FastAPI. Les
-10 tests backend réussissent également. L'inspection visuelle reste à effectuer,
-l'outil navigateur étant indisponible lors de cette phase. Voir le
-[relevé de vérification](docs/verification-phase-1.md).
-
-Les pages détaillées, le jeu, les résultats sportifs et le RAG seront construits
-dans les phases suivantes. Aucun fournisseur externe n'est nécessaire à cette
-phase. Les pages restent en `noindex` jusqu'à la préparation de la production.
+Le portfolio propose un accueil inspiré d’un stade de nuit, un menu responsive,
+les pages CV, parcours, projets et contact, une recherche et un jeu de devinettes.
+L’assistant répond à partir des sources publiques. La génération Groq, la recherche
+vectorielle Upstash et les scores football-data.org s’activent avec leurs clés serveur.
+Le guide de déploiement décrit les modes disponibles et leur configuration.
 
 ## Démarrer sous Windows / PowerShell
 
@@ -57,7 +49,9 @@ pnpm dev:web
 ```powershell
 pnpm typecheck
 pnpm build
+node --test scripts/test-game.mjs
 .\.venv\Scripts\python.exe -m pytest apps/api
+.\.venv\Scripts\python.exe scripts/index_knowledge.py --check
 ```
 
 Avec les deux serveurs lancés, `pnpm verify:local` vérifie le trajet HTTP complet.
@@ -71,8 +65,10 @@ La commande de build n'appelle aucun service IA ou sportif. Le frontend relaie
 téléphone et ville. L'adresse postale complète ne doit pas être ajoutée au dépôt,
 au PDF public ou aux documents indexés par le futur assistant.
 
-Le CV d'origine n'est pas copié dans ce dépôt : sa version publique sera préparée
-pendant la phase CV. Ne pas déposer un document privé dans un dossier `public/`.
+Le CV public est composé à partir de `content/profile.json` et `content/resume.json`.
+Après une mise à jour, régénérer le PDF avec `python scripts/generate_public_cv.py`
+(ReportLab), puis actualiser le corpus avec `python scripts/index_knowledge.py`.
+Les projets et joueurs se trouvent dans `content/projects.json` et `content/players.json`.
 
 ## Documentation
 
@@ -82,3 +78,5 @@ pendant la phase CV. Ne pas déposer un document privé dans un dossier `public/
 - [Préparation du déploiement](docs/deployment.md)
 - [Référencement](docs/seo.md)
 - [Vérification de la phase 1](docs/verification-phase-1.md)
+- [Configuration des services](docs/services.md)
+- [Vérification du portfolio](docs/verification-portfolio.md)

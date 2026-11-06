@@ -11,13 +11,21 @@ dependencies = [
     "fastapi==0.162.0",
     "uvicorn==0.54.0",
     "pydantic-settings==2.16.2",
+    "httpx==0.28.1",
+    "tzdata==2025.2; sys_platform == 'win32'",
 ]
 
 [project.optional-dependencies]
-dev = ["pytest==9.2.0", "httpx==0.28.1"]
+dev = ["pytest==9.2.0"]
+
+[tool.setuptools.package-data]
+app = ["data/*.json"]
 
 [tool.setuptools.packages.find]
 include = ["app*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.vercel]
+entrypoint = "app/main.py"

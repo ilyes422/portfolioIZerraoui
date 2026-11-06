@@ -1,0 +1,107 @@
+.form {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 7px 8px 7px 20px;
+  border: 1px solid #43efad;
+  background: #08171ee8;
+  color: #f3f7fa;
+  border-radius: 100px;
+  box-shadow: 0 0 22px #43efad1c;
+  min-height: 60px;
+}
+.form:focus-within {
+  outline: 2px solid #43efad;
+  outline-offset: 4px;
+  box-shadow: 0 0 28px #43efad25;
+}
+.form > svg {
+  flex-shrink: 0;
+}
+.form input {
+  width: 100%;
+  min-width: 0;
+  padding: 10px 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  font-size: 13px;
+  font-family: inherit;
+}
+.form input::placeholder {
+  color: #bac7d9;
+  opacity: 1;
+}
+.form input::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+.form button {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: #43efad;
+  color: #052218;
+  cursor: pointer;
+}
+.form button:hover {
+  background: #8bffd0;
+}
+.compact {
+  min-height: 42px;
+  padding: 4px 5px 4px 13px;
+  gap: 8px;
+  border-color: var(--border);
+  background: var(--input-background);
+  box-shadow: none;
+  color: var(--muted);
+}
+.compact input {
+  font-size: 10px;
+  padding: 7px 0;
+  color: var(--text);
+}
+.compact input::placeholder {
+  color: var(--muted);
+}
+.compact button {
+  width: 29px;
+  height: 29px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.compact:focus-within {
+  outline-color: var(--accent);
+}
+@media (max-width: 600px) {
+  .form {
+    padding-left: 15px;
+    gap: 10px;
+    min-height: 56px;
+  }
+  .form input {
+    font-size: 11px;
+  }
+  .form > svg {
+    width: 20px;
+  }
+  .form button {
+    width: 38px;
+    height: 38px;
+  }
+  .compact {
+    min-height: 42px;
+  }
+  .compact button {
+    width: 29px;
+    height: 29px;
+  }
+}
+.form button:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}

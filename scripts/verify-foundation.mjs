@@ -35,6 +35,29 @@ try {
   assert.match(health.headers.get("content-type") ?? "", /application\/json/);
   assert.deepEqual(await health.json(), { status: "ok", service: "portfolio-api", version: "0.1.0" });
   console.log("OK — frontend → proxy → FastAPI : contrat de santé vérifié");
+
+  for (const route of ["/cv", "/parcours", "/projets", "/jouer", "/resultats", "/contact"]) {
+    assert.match(await (await request(route)).text(), /<h1\b/);
+  }
+  assert.match(await (await request("/recherche?q=CV")).text(), /Mon CV et mes compétences/);
+  const cv = await request("/documents/cv-ilyes-zerraoui.pdf");
+  assert.match(cv.headers.get("content-type") ?? "", /application\/pdf/);
+  console.log("OK — navigation, recherche et CV public");
+
+  const football = await (await request("/api/matches")).json();
+  assert.ok(Array.isArray(football.matches));
+  assert.ok(["ready", "stale", "unconfigured", "unavailable"].includes(football.state));
+  const chat = await fetch(new URL("/api/assistant", origin), {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ question: "Quelles missions chez XEFI ?" }),
+    signal: AbortSignal.timeout(24_000),
+  });
+  assert.equal(chat.status, 200);
+  const answer = await chat.json();
+  assert.match(answer.text, /CakePHP|Laravel/);
+  assert.ok(answer.sources.some((source) => source.href === "/parcours"));
+  console.log("OK — contrats HTTP résultats et assistant sourcé");
 } catch (error) {
   console.error(`Échec de la vérification : ${error.message}`);
   process.exitCode = 1;

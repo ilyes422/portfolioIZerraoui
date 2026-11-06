@@ -1,0 +1,5 @@
+[
+  {"id":"portfolio","title":"Portfolio interactif","kind":"Projet personnel","description":"Un portfolio qui réunit mon profil de développeur, un espace football, un jeu de devinettes et un assistant appuyé sur des sources publiques.","technologies":["React","Next.js","TypeScript","Python","FastAPI"],"repository":"https://github.com/ilyes422/portfolioIZerraoui"},
+  {"id":"applications-metier","title":"Applications métier pour concessions","kind":"Expérience professionnelle · XEFI","description":"Développement et maintenance de sites et d’applications pour des concessions automobiles, recueil des besoins et démonstrations en équipe agile.","technologies":["PHP","CakePHP","Laravel"]},
+  {"id":"api-spring","title":"API avec Spring Boot","kind":"Stage · SNCF","description":"Développement d’une API pendant mon stage informatique, après une prise en main de Java et de Spring Boot.","technologies":["Java","Spring Boot"]}
+]
