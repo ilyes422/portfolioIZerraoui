@@ -65,13 +65,69 @@ def test_football_cache_and_stale_on_rate_limit():
     asyncio.run(exercise())
 
 
-def test_no_sports_key_returns_explicit_unconfigured_state():
+def test_no_sports_key_uses_open_liga_with_verified_day_and_scores():
     settings = Settings(_env_file=None, app_env="test")
-    with TestClient(create_app(settings)) as client:
-        response = client.get("/api/matches")
-        assert response.status_code == 200
-        assert response.json()["state"] == "unconfigured"
-        assert response.json()["matches"] == []
+    service = FootballService(settings, Redis(settings))
+    now = datetime(2026, 11, 6, 12, tzinfo=UTC)
+    calls = []
+    fixture = {
+        "matchID": 123,
+        "matchDateTimeUTC": "2026-11-05T23:00:00Z",
+        "matchIsFinished": True,
+        "team1": {"teamName": "Équipe A"},
+        "team2": {"teamName": "Équipe B"},
+        "matchResults": [
+            {"resultTypeID": 1, "pointsTeam1": 0, "pointsTeam2": 0},
+            {"resultTypeID": 2, "pointsTeam1": 0, "pointsTeam2": 2},
+            {"resultTypeID": 5, "pointsTeam1": 4, "pointsTeam2": 5},
+        ],
+    }
+
+    def provider(request: httpx.Request):
+        calls.append(request.url.path)
+        assert request.url.host == "api.openligadb.de"
+        assert request.url.path.endswith("/2026")
+        assert "X-Auth-Token" not in request.headers
+        if "/pl/" in request.url.path:
+            return httpx.Response(200, json=[
+                fixture,
+                {**fixture, "matchID": 124, "matchDateTimeUTC": "2026-11-06T23:00:00Z"},
+                {**fixture, "matchID": 125, "matchIsFinished": False},
+            ])
+        if "/ucl/" in request.url.path:
+            return httpx.Response(200, json=[
+                {**fixture, "matchDateTimeUTC": "2026-11-04T20:00:00Z"},
+            ])
+        return httpx.Response(503)
+
+    async def exercise():
+        async with httpx.AsyncClient(transport=httpx.MockTransport(provider)) as client:
+            first = await service.today(client, now)
+            cached = await service.today(client, now + timedelta(minutes=10))
+        assert first == cached
+        assert first.state == "ready" and first.provider == "openligadb"
+        assert first.competitions == ["PL", "CL"]
+        assert [match.id for match in first.matches] == [123, 125]
+        finished, unconfirmed = first.matches
+        assert (finished.home_score, finished.away_score, finished.status) == (0, 2, "Terminé")
+        assert unconfirmed.home_score is None and unconfirmed.status == "Résultat à confirmer"
+        assert len(calls) == 4
+
+    asyncio.run(exercise())
+
+
+def test_open_liga_provider_failure_is_not_an_empty_match_day():
+    settings = Settings(_env_file=None, app_env="test")
+    service = FootballService(settings, Redis(settings))
+
+    async def exercise():
+        transport = httpx.MockTransport(lambda request: httpx.Response(503))
+        async with httpx.AsyncClient(transport=transport) as client:
+            result = await service.today(client)
+        assert result.state == "unavailable" and result.provider == "openligadb"
+        assert not result.competitions and not result.matches
+
+    asyncio.run(exercise())
 
 
 def test_assistant_returns_real_source_and_refuses_unknown_topic():

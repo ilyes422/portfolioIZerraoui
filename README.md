@@ -10,7 +10,8 @@ Le portfolio propose un accueil inspiré d’un stade de nuit, un menu responsiv
 les pages CV, parcours, projets et contact, une recherche et un jeu de devinettes.
 Les questions posées depuis l’accueil ouvrent la conversation sur `/assistant`,
 où l’assistant répond à partir des sources publiques. La génération Groq, la recherche
-vectorielle Upstash et les scores football-data.org s’activent avec leurs clés serveur.
+vectorielle Upstash et la couverture de football-data.org s’activent avec leurs
+clés serveur. Sans clé football, les scores proviennent d’OpenLigaDB.
 Le guide de déploiement décrit les modes disponibles et leur configuration.
 
 ## Démarrer sous Windows / PowerShell

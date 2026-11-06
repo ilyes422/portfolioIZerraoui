@@ -28,6 +28,8 @@ type Match = {
 };
 type MatchDay = {
   state: "ready" | "stale" | "unconfigured" | "unavailable";
+  provider?: "football-data.org" | "openligadb";
+  competitions?: string[];
   updated_at: string | null;
   matches: Match[];
 };
@@ -81,9 +83,17 @@ export function ResultsPanel({ detailed = false }: { detailed?: boolean }) {
     };
   }, [attempt]);
 
+  const openLiga = data?.provider === "openligadb";
+  const tabs = competitions.filter(
+    ({ code }) =>
+      code === "all" || !data?.competitions || data.competitions.includes(code),
+  );
+  const selected = tabs.some(({ code }) => code === competition)
+    ? competition
+    : "all";
   const filtered =
     data?.matches.filter(
-      (match) => competition === "all" || match.code === competition,
+      (match) => selected === "all" || match.code === selected,
     ) ?? [];
   const matches = detailed ? filtered : filtered.slice(0, 5);
   return (
@@ -104,11 +114,11 @@ export function ResultsPanel({ detailed = false }: { detailed?: boolean }) {
         role="group"
         aria-label="Choisir une compétition"
       >
-        {competitions.map(({ code, name }) => (
+        {tabs.map(({ code, name }) => (
           <button
             key={code}
             type="button"
-            aria-pressed={code === competition}
+            aria-pressed={code === selected}
             onClick={() => setCompetition(code)}
           >
             {name}
@@ -162,19 +172,30 @@ export function ResultsPanel({ detailed = false }: { detailed?: boolean }) {
       )}
       {data?.updated_at && (
         <p className={styles.updated}>
-          {data.state === "stale" ? "Dernières données connues" : "Mise à jour"}{" "}
-          à {parisTime.format(new Date(data.updated_at))} · Scores différés
+          {data.state === "stale" ? "Dernier relevé" : "Données relevées"} à{" "}
+          {parisTime.format(new Date(data.updated_at))} ·{" "}
+          {openLiga
+            ? "Scores communautaires, parfois incomplets"
+            : "Scores différés"}
         </p>
       )}
-      <a
-        className={styles.footerLink}
-        href="https://www.football-data.org/"
-        target="_blank"
-        rel="noreferrer"
-      >
-        Football data provided by the Football-Data.org API{" "}
-        <ArrowRight size={13} aria-hidden="true" />
-      </a>
+      {data && (
+        <a
+          className={styles.footerLink}
+          href={
+            openLiga
+              ? "https://www.openligadb.de/"
+              : "https://www.football-data.org/"
+          }
+          target="_blank"
+          rel="noreferrer"
+        >
+          {openLiga
+            ? "Données OpenLigaDB (licence ODbL)"
+            : "Football data provided by the Football-Data.org API"}
+          <ArrowRight size={13} aria-hidden="true" />
+        </a>
+      )}
     </section>
   );
 }

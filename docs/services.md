@@ -4,14 +4,21 @@ Le frontend transmet les appels à FastAPI via `/api/*`. Les clés appartiennent
 l’environnement serveur de l’API. En local, utiliser `apps/api/.env`, ignoré par Git.
 Sur Vercel, utiliser **Settings → Environment Variables** du projet API.
 
-## Football-data.org
+## Scores de football
 
-Créer un compte gratuit et ajouter `FOOTBALL_DATA_TOKEN`. L’API normalise les matchs
-du jour en heure de Paris. Elle conserve les dernières données et indique le retard
-des scores du plan gratuit. Sans clé, elle renvoie `unconfigured`, avec une liste
-vide et un état correspondant dans l’interface.
+Sans clé, l’API utilise OpenLigaDB, une source communautaire sous licence ODbL.
+Elle consulte la Bundesliga, la Premier League, la Liga et la Ligue des champions,
+puis affiche les matchs du jour en heure de Paris. Les résultats peuvent être
+incomplets. Un score est affiché quand un résultat final a été publié. Le cache
+des données OpenLigaDB est conservé 15 minutes entre les actualisations.
 
-Référence : https://www.football-data.org/pricing
+Pour inclure la Ligue 1 et la Serie A, créer un compte football-data.org gratuit,
+ajouter `FOOTBALL_DATA_TOKEN` au projet API et redéployer. La clé active
+football-data.org comme source principale. Le plan gratuit fournit des scores
+différés.
+
+- [API OpenLigaDB](https://api.openligadb.de/index.html)
+- [Offres football-data.org](https://www.football-data.org/pricing)
 
 ## Assistant et recherche
 
