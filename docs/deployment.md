@@ -6,12 +6,23 @@ et les appels aux fournisseurs s’activent après configuration serveur.
 
 ## Cible Vercel
 
-Deux projets liés au dépôt `ilyes422/portfolioIZerraoui` :
+Deux projets construits à partir du dépôt `ilyes422/portfolioIZerraoui` :
 
 | Projet | Répertoire racine | Framework |
 | --- | --- | --- |
 | Portfolio public | `apps/web` | Next.js |
 | API | `apps/api` | FastAPI |
+
+La production utilise l’équipe `IZerraoui` sur l’offre Hobby. Le projet
+`ilyes.zerraoui-portfolio` répond sur `https://ilyes-zerraoui-portfolio.vercel.app`
+et le projet `ilyes-zerraoui-portfolio-api` sur
+`https://ilyes-zerraoui-portfolio-api.vercel.app`. Le frontend utilise Node.js 24.
+
+Le premier déploiement a été réalisé depuis les fichiers versionnés via l’API
+Vercel. Pour activer les déploiements automatiques, installer l’intégration
+GitHub pour `ilyes422/portfolioIZerraoui`, puis connecter le dépôt à chacun des
+projets existants dans **Settings → Git**. Conserver les répertoires racine
+ci-dessus et sélectionner `main` comme branche de production.
 
 Le frontend importe `content/profile.json`, situé hors de son répertoire racine.
 Lors de la configuration Vercel, autoriser l'inclusion des fichiers situés hors
@@ -29,8 +40,7 @@ considérer cette configuration comme opérationnelle.
    de production après vérification. Recompiler pour publier le sitemap.
 6. Tester `/api/health` à travers le domaine public, puis les fonctionnalités finales.
 
-L'adresse visée est `ilyes-zerraoui-portfolio.vercel.app`, sous réserve de
-disponibilité. Le nom de projet demandé est `ilyes.zerraoui-portfolio`.
+L’API déclare `app.main:app` comme point d’entrée Vercel dans son `pyproject.toml`.
 
 ## Gratuité et persistance
 
