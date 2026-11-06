@@ -36,7 +36,7 @@ try {
   assert.deepEqual(await health.json(), { status: "ok", service: "portfolio-api", version: "0.1.0" });
   console.log("OK — frontend → proxy → FastAPI : contrat de santé vérifié");
 
-  for (const route of ["/cv", "/parcours", "/projets", "/jouer", "/resultats", "/contact"]) {
+  for (const route of ["/cv", "/parcours", "/projets", "/jouer", "/resultats", "/contact", "/assistant"]) {
     assert.match(await (await request(route)).text(), /<h1\b/);
   }
   assert.match(await (await request("/recherche?q=CV")).text(), /Mon CV et mes compétences/);

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { AssistantProvider } from "@/components/assistant-panel";
 import { profile } from "@/lib/profile";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -34,7 +35,7 @@ export default function RootLayout({
           Aller au contenu
         </a>
         <SiteHeader />
-        {children}
+        <AssistantProvider>{children}</AssistantProvider>
         <SiteFooter />
       </body>
     </html>
