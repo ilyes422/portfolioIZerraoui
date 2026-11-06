@@ -109,7 +109,11 @@ async def retrieve(client: httpx.AsyncClient, settings: Settings, query: str) ->
 
 
 def source_links(documents: list[dict]) -> list[Source]:
-    return list({doc["href"]: Source(title=doc["label"], href=doc["href"]) for doc in documents}.values())
+    links = {doc["href"]: Source(title=doc["label"], href=doc["href"]) for doc in documents}
+    if "/cv" in links:
+        pdf = "/documents/cv-ilyes-zerraoui.pdf"
+        links[pdf] = Source(title="Consulter le CV (PDF)", href=pdf)
+    return list(links.values())
 
 
 async def answer_question(
