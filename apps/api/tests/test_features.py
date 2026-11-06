@@ -144,6 +144,15 @@ def test_assistant_returns_real_source_and_refuses_unknown_topic():
         assert client.post("/api/assistant", json={"question": " "}).status_code == 422
 
 
+def test_assistant_links_to_the_original_pdf_for_a_cv_question():
+    settings = Settings(_env_file=None, app_env="test")
+    with TestClient(create_app(settings)) as client:
+        response = client.post("/api/assistant", json={"question": "Montre-moi ton CV"})
+    assert response.status_code == 200
+    links = {source["href"] for source in response.json()["sources"]}
+    assert {"/cv", "/documents/cv-ilyes-zerraoui.pdf"} <= links
+
+
 def test_generation_passes_only_approved_context_and_keeps_server_links():
     settings = Settings(_env_file=None, app_env="test", llm_api_key="fixture-key")
     budget = GenerationBudget(settings, Redis(settings))
