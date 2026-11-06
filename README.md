@@ -8,7 +8,8 @@ typographie lisible et interactions accessibles.
 
 Le portfolio propose un accueil inspiré d’un stade de nuit, un menu responsive,
 les pages CV, parcours, projets et contact, une recherche et un jeu de devinettes.
-L’assistant répond à partir des sources publiques. La génération Groq, la recherche
+Les questions posées depuis l’accueil ouvrent la conversation sur `/assistant`,
+où l’assistant répond à partir des sources publiques. La génération Groq, la recherche
 vectorielle Upstash et les scores football-data.org s’activent avec leurs clés serveur.
 Le guide de déploiement décrit les modes disponibles et leur configuration.
 
@@ -61,13 +62,11 @@ La commande de build n'appelle aucun service IA ou sportif. Le frontend relaie
 
 ## Modifier les informations publiques
 
-`content/profile.json` contient les coordonnées publiques approuvées : e-mail,
-téléphone et ville. L'adresse postale complète ne doit pas être ajoutée au dépôt,
-au PDF public ou aux documents indexés par le futur assistant.
-
-Le CV public est composé à partir de `content/profile.json` et `content/resume.json`.
-Après une mise à jour, régénérer le PDF avec `python scripts/generate_public_cv.py`
-(ReportLab), puis actualiser le corpus avec `python scripts/index_knowledge.py`.
+`apps/web/public/documents/cv-ilyes-zerraoui.pdf` est le PDF d’origine fourni
+pour publication. Le remplacer directement pour mettre à jour le téléchargement.
+Les pages et l’assistant utilisent les données structurées de `content/`.
+Après une modification de ces données, actualiser le corpus avec
+`python scripts/index_knowledge.py`.
 Les projets et joueurs se trouvent dans `content/projects.json` et `content/players.json`.
 
 ## Documentation

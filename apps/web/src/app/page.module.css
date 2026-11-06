@@ -730,3 +730,42 @@
     grid-column: 1 / -1;
   }
 }
+.assistantConversation {
+  max-width: 860px;
+  padding: clamp(16px, 3vw, 28px);
+}
+.assistantConversation .panelHeader {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 15px;
+}
+.assistantConversation .chatLog {
+  max-height: min(60dvh, 640px);
+  min-height: 150px;
+  font-size: 14px;
+}
+.assistantConversation .chatMessage {
+  max-width: min(100%, 64ch);
+  overflow-wrap: anywhere;
+}
+.assistantConversation .bubble,
+.assistantConversation .bubble strong {
+  font-size: 14px;
+}
+.assistantConversation .suggestionLabel {
+  margin: 20px 0 10px;
+}
+.assistantConversation .suggestions {
+  padding: 0;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.assistantConversation .assistantSearch {
+  padding-top: 20px;
+}
+.assistantConversation .assistantSearch input {
+  font-size: 16px;
+}
+.assistantConversation .assistantSearch button {
+  min-width: 44px;
+  min-height: 44px;
+}

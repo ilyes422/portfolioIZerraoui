@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, Bot, MessageCircle } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { ArrowRight, ArrowUpRight, Bot, MessageCircle } from "lucide-react";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import type { FormEvent, ReactNode } from "react";
 import styles from "@/app/page.module.css";
@@ -17,7 +18,7 @@ type Message = {
 const Chat = createContext<{
   messages: Message[];
   pending: boolean;
-  send: (text: string, moveFocus?: boolean) => Promise<void>;
+  send: (text: string) => Promise<void>;
 } | null>(null);
 
 const suggestions = [
@@ -40,19 +41,13 @@ export function AssistantProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => () => running.current?.abort(), []);
 
-  async function send(text: string, moveFocus = false) {
+  async function send(text: string) {
     const question = text.trim().slice(0, 500);
     if (!question || running.current) return;
     const controller = new AbortController();
     running.current = controller;
     setMessages((current) => [...current, { role: "user", text: question }]);
     setPending(true);
-    if (moveFocus) {
-      const heading = document.getElementById("assistant-titre");
-      heading?.focus({ preventScroll: true });
-      heading?.scrollIntoView({ block: "center" });
-    }
-
     const timeout = setTimeout(() => controller.abort(), 24_000);
     try {
       const response = await fetch("/api/assistant", {
@@ -101,15 +96,34 @@ export function AssistantProvider({ children }: { children: ReactNode }) {
   );
 }
 
-export function AskQuestion({ compact = false }: { compact?: boolean }) {
-  const [question, setQuestion] = useState("");
+function useAskQuestion(openAssistant: boolean) {
+  const router = useRouter();
   const { pending, send } = useChat();
+
+  function ask(question: string) {
+    if (!question.trim() || pending) return;
+    if (openAssistant) router.push("/assistant");
+    void send(question);
+  }
+
+  return { pending, ask };
+}
+
+export function AskQuestion({
+  compact = false,
+  openAssistant = false,
+}: {
+  compact?: boolean;
+  openAssistant?: boolean;
+}) {
+  const [question, setQuestion] = useState("");
+  const { pending, ask } = useAskQuestion(openAssistant);
   const id = compact ? "question-rapide" : "question-portfolio";
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!question.trim() || pending) return;
-    void send(question, !compact);
+    ask(question);
     setQuestion("");
   }
 
@@ -141,8 +155,13 @@ export function AskQuestion({ compact = false }: { compact?: boolean }) {
   );
 }
 
-export function AssistantPanel() {
-  const { messages, pending, send } = useChat();
+export function AssistantPanel({
+  standalone = false,
+}: {
+  standalone?: boolean;
+}) {
+  const { messages, pending } = useChat();
+  const { ask } = useAskQuestion(!standalone);
   const log = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -151,15 +170,21 @@ export function AssistantPanel() {
 
   return (
     <section
-      className={`${styles.panel} ${styles.assistantPanel}`}
+      className={`${styles.panel} ${standalone ? styles.assistantConversation : styles.assistantPanel}`}
       aria-labelledby="assistant-titre"
     >
       <div className={styles.panelHeader}>
-        <h2 id="assistant-titre" tabIndex={-1}>
-          <MessageCircle size={20} aria-hidden="true" /> Assistant personnel
+        <h2 id="assistant-titre">
+          <MessageCircle size={20} aria-hidden="true" />{" "}
+          {standalone ? "Conversation" : "Assistant personnel"}
         </h2>
+        {!standalone && (
+          <Link href="/assistant">
+            Ouvrir <ArrowRight size={13} aria-hidden="true" />
+          </Link>
+        )}
       </div>
-      {messages.length === 0 ? (
+      {!standalone || messages.length === 0 ? (
         <>
           <div className={styles.assistantIntro}>
             <span className={styles.bot}>
@@ -179,7 +204,7 @@ export function AssistantPanel() {
               <button
                 key={question}
                 type="button"
-                onClick={() => void send(question)}
+                onClick={() => ask(question)}
                 disabled={pending}
               >
                 {question}
@@ -224,7 +249,7 @@ export function AssistantPanel() {
         </div>
       )}
       <div className={styles.assistantSearch}>
-        <AskQuestion compact />
+        <AskQuestion compact={!standalone} openAssistant={!standalone} />
       </div>
     </section>
   );

@@ -14,4 +14,5 @@ export const publicRoutes = [
   "/jouer",
   "/resultats",
   "/contact",
+  "/assistant",
 ] as const;
