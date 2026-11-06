@@ -28,4 +28,4 @@ include = ["app*"]
 testpaths = ["tests"]
 
 [tool.vercel]
-entrypoint = "app/main.py"
+entrypoint = "app.main:app"
